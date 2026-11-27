@@ -13,11 +13,11 @@ const Blogs = async ({
     .filter((blog) => blog.title.toLowerCase().includes(filter.toLowerCase()));
 
   return (
-    <div>
-      <h2>blogs</h2>
+    <div className="m-auto w-fit p-3 mt-4">
+      <h2 className="text-2xl mb-4">Blogs</h2>
       <ul>
         {sortedBlogs.map((blog) => (
-          <li key={blog.id}>
+          <li key={blog.id} className="mb-2">
             <Link href={`/blogs/${blog.id}`}>
               "{blog.title}" - {blog.author}{" "}
             </Link>{" "}
@@ -26,7 +26,11 @@ const Blogs = async ({
         ))}
       </ul>
       <form action={"/blogs"} method="GET">
-        <input type="text" name="filter" />
+        <input
+          className="bg-stone-200 rounded-sm mt-4 mr-2 text-slate-900"
+          type="text"
+          name="filter"
+        />
         <button type="submit">Search</button>
       </form>
     </div>

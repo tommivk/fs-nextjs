@@ -9,6 +9,7 @@ export const createBlog = async (
   prevState: {
     values: { title: string; author: string; url: string };
     error: string;
+    success?: boolean;
   },
   formData: FormData,
 ) => {
@@ -30,23 +31,26 @@ export const createBlog = async (
     return {
       values,
       error: "Title must be at least 5 characters long",
+      success: false,
     };
   }
   if (!author || author.length < 5) {
     return {
       values,
       error: "Author must be at least 5 characters long",
+      success: false,
     };
   }
   if (!url || url.length < 5) {
     return {
       values,
       error: "Url must be at least 5 characters long",
+      success: false,
     };
   }
   addBlog(title, author, url);
   revalidatePath("/blogs");
-  redirect("/blogs");
+  return { values, error: "", success: true };
 };
 
 export const likeBlog = async (formData: FormData) => {

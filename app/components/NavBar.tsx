@@ -7,7 +7,7 @@ const NavBar = () => {
   const { data: session } = useSession();
 
   return (
-    <nav>
+    <nav className="m-auto w-fit p-2 text-lg">
       <Link href="/">home</Link>
       {" | "}
       <Link href="/blogs">blogs</Link>
