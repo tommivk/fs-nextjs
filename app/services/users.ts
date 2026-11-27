@@ -20,3 +20,12 @@ export const createUser = async (
 ) => {
   await db.insert(users).values({ username, name, passwordHash });
 };
+
+export const updateToken = async (id: number, token: string) => {
+  const user = await db.query.users.findFirst({
+    where: eq(users.id, id),
+  });
+  if (user) {
+    await db.update(users).set({ token }).where(eq(users.id, id));
+  }
+};

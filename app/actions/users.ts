@@ -1,8 +1,10 @@
 "use server";
 
 import bcrypt from "bcryptjs";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createUser, getUserWithBlogs } from "../services/users";
+import { createUser, getUserWithBlogs, updateToken } from "../services/users";
+import { getCurrentUser } from "../services/session";
 
 export const registerUser = async (
   prevState: {
@@ -67,4 +69,14 @@ export const registerUser = async (
     };
   }
   redirect("/login");
+};
+
+export const generateNewToken = async () => {
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect("/login");
+  }
+  const token = crypto.randomUUID();
+  await updateToken(user.id, token);
+  revalidatePath("/me");
 };

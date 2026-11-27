@@ -29,6 +29,13 @@
       "when": 1795805120086,
       "tag": "0003_glossy_bug",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1795813335494,
+      "tag": "0004_broken_spyke",
+      "breakpoints": true
     }
   ]
 }
