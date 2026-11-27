@@ -21,7 +21,12 @@ const NavBar = () => {
           <Link href="/me">me</Link>
           {" | "}
           <em>{session.user?.name} logged in</em>{" "}
-          <button onClick={() => signOut()}>logout</button>
+          <button
+            onClick={() => signOut()}
+            className="rounded-md  w-fit m-auto bg-indigo-500 px-2 mt-6"
+          >
+            logout
+          </button>
         </>
       ) : (
         <>

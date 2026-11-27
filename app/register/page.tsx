@@ -3,62 +3,80 @@
 import { useActionState } from "react";
 import { registerUser } from "../actions/users";
 
+const inputClass = "bg-stone-200 rounded-sm mt-4 ml-2 text-slate-900";
+const labelClass = "w-40 inline-block";
+
 const RegisterPage = () => {
   const [state, formAction] = useActionState(registerUser, {
     values: { username: "", name: "", password: "", passwordConfirm: "" },
     error: "",
   });
   return (
-    <div>
-      <h2>Register</h2>
-      <form action={formAction}>
-        <div>
-          <label>
-            Username
+    <div className="flex justify-center">
+      <div className="m-auto px-20 py-20 bg-slate-500 mt-20 rounded-2xl w-fit">
+        <h2 className="text-2xl mb-4">Register</h2>
+        <form action={formAction}>
+          <div>
+            <label htmlFor="username" className={labelClass}>
+              Username
+            </label>
             <input
+              id="username"
+              className={inputClass}
               type="text"
               name="username"
               required
               defaultValue={state.values?.username}
             />
-          </label>
-        </div>
-        <div>
-          <label>
-            Name
+          </div>
+          <div>
+            <label htmlFor="name" className={labelClass}>
+              Name
+            </label>
             <input
+              id="name"
+              className={inputClass}
               type="text"
               name="name"
               required
               defaultValue={state.values?.name}
             />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password
+          </div>
+          <div>
+            <label htmlFor="password" className={labelClass}>
+              Password
+            </label>
             <input
+              id="password"
+              className={inputClass}
               type="password"
               name="password"
               required
               defaultValue={state.values?.password}
             />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password
+          </div>
+          <div>
+            <label htmlFor="passwordConfirm" className={labelClass}>
+              Confirm password
+            </label>
             <input
+              id="passwordConfirm"
+              className={inputClass}
               type="password"
               name="passwordConfirm"
               required
               defaultValue={state.values?.passwordConfirm}
             />
-          </label>
-        </div>
-        <button type="submit">Register</button>
-        {state.error && <p style={{ color: "red" }}>{state.error}</p>}
-      </form>
+          </div>
+          <button
+            className="rounded-md block w-fit m-auto bg-indigo-500 px-2 mt-6"
+            type="submit"
+          >
+            Register
+          </button>
+          {state.error && <p className="text-red-700 mt-2">{state.error}</p>}
+        </form>
+      </div>
     </div>
   );
 };
