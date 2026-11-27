@@ -7,7 +7,8 @@ const Blogs = async ({
   searchParams: Promise<{ filter?: string }>;
 }) => {
   const { filter = "" } = await searchParams;
-  const blogs = getBlogs()
+  const blogs = await getBlogs();
+  const sortedBlogs = blogs
     .sort((a, b) => b.likes - a.likes)
     .filter((blog) => blog.title.toLowerCase().includes(filter.toLowerCase()));
 
@@ -15,7 +16,7 @@ const Blogs = async ({
     <div>
       <h2>blogs</h2>
       <ul>
-        {blogs.map((blog) => (
+        {sortedBlogs.map((blog) => (
           <li key={blog.id}>
             <Link href={`/blogs/${blog.id}`}>
               "{blog.title}" - {blog.author}{" "}
