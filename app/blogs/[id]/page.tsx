@@ -1,17 +1,18 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { addToReadingList, likeBlog } from "@/app/actions/blogs";
 import { getBlogById, getUsersReadingList } from "@/app/services/blogs";
+import { getCurrentUser } from "@/app/services/session";
 
 const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const blog = await getBlogById(Number(id));
-  const readingList = await getUsersReadingList();
+  const user = await getCurrentUser();
+  const readingList = user ? await getUsersReadingList() : [];
 
   if (!blog) {
     notFound();
   }
-
-  console.log({ readingList });
 
   const isInReadingList = readingList.some((b) => b.blogId === blog.id);
 
@@ -34,23 +35,24 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
             Like
           </button>
         </form>
-        {isInReadingList ? (
-          <p className="mt-4">This blog is in your reading list</p>
-        ) : (
-          <form
-            action={addToReadingList}
-            className="mx-auto mt-4 text-lg w-fit"
-          >
-            <input type="hidden" name="blogId" value={blog.id} />
-            <button
-              className="rounded-md bg-indigo-500 px-2 mt-2"
-              type="submit"
-              data-testid="add-to-reading-list-button"
+        {user &&
+          (isInReadingList ? (
+            <p className="mt-4">This blog is in your reading list</p>
+          ) : (
+            <form
+              action={addToReadingList}
+              className="mx-auto mt-4 text-lg w-fit"
             >
-              Add to reading list
-            </button>
-          </form>
-        )}
+              <input type="hidden" name="blogId" value={blog.id} />
+              <button
+                className="rounded-md bg-indigo-500 px-2 mt-2"
+                type="submit"
+                data-testid="add-to-reading-list-button"
+              >
+                Add to reading list
+              </button>
+            </form>
+          ))}
       </div>
     </div>
   );

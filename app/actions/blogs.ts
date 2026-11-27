@@ -66,6 +66,10 @@ export const likeBlog = async (formData: FormData) => {
 };
 
 export const addToReadingList = async (formData: FormData) => {
+  const session = await auth();
+  if (!session) {
+    redirect("/login");
+  }
   const blogId = Number(formData.get("blogId"));
   await addBlogToReadingList(blogId);
   revalidatePath("/blogs");
