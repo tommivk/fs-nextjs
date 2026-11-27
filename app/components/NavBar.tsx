@@ -25,6 +25,8 @@ const NavBar = () => {
         <>
           {" | "}
           <Link href="/login">login</Link>
+          {" | "}
+          <Link href="/register">register</Link>
         </>
       )}
     </nav>
