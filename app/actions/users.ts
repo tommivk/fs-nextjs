@@ -15,6 +15,7 @@ export const registerUser = async (
       passwordConfirm: string;
     };
     error: string;
+    field?: string;
   },
   formData: FormData,
 ) => {
@@ -30,6 +31,7 @@ export const registerUser = async (
     return {
       values,
       error: "Username is taken",
+      field: "username",
     };
   }
 
@@ -37,18 +39,21 @@ export const registerUser = async (
     return {
       values,
       error: "username must be at least 4 characters long",
+      field: "username",
     };
   }
   if (!name) {
     return {
       values,
       error: "Name is required",
+      field: "name",
     };
   }
   if (!password || password.length < 4) {
     return {
       values,
       error: "Password must be at least 4 characters long",
+      field: "password",
     };
   }
 
@@ -56,6 +61,7 @@ export const registerUser = async (
     return {
       values,
       error: "Password confirmation does not match",
+      field: "passwordConfirm",
     };
   }
 
@@ -66,6 +72,7 @@ export const registerUser = async (
     return {
       values,
       error: "Failed to create user",
+      field: "form",
     };
   }
   redirect("/login");

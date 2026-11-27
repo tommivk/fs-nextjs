@@ -16,10 +16,14 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const isInReadingList = readingList.some((b) => b.blogId === blog.id);
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center" data-testid="blog-detail">
       <div className="m-auto p-20 bg-slate-500 mt-20 rounded-2xl w-fit">
-        <h2 className="text-2xl">{blog.title}</h2>
-        <h3 className="text-lg">Author: {blog.author}</h3>
+        <h2 className="text-2xl" data-testid="blog-title">
+          {blog.title}
+        </h2>
+        <h3 className="text-lg" data-testid="blog-author">
+          Author: {blog.author}
+        </h3>
         <a className="text-blue-200" href={blog.url}>
           {blog.url}
         </a>
@@ -41,6 +45,7 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
             <button
               className="rounded-md bg-indigo-500 px-2 mt-2"
               type="submit"
+              data-testid="add-to-reading-list-button"
             >
               Add to reading list
             </button>

@@ -53,7 +53,7 @@ export const createBlog = async (
       success: false,
     };
   }
-  addBlog(title, author, url);
+  await addBlog(title, author, url);
   revalidatePath("/blogs");
   return { values, error: "", success: true };
 };

@@ -10,6 +10,7 @@ const RegisterPage = () => {
   const [state, formAction] = useActionState(registerUser, {
     values: { username: "", name: "", password: "", passwordConfirm: "" },
     error: "",
+    field: "",
   });
   return (
     <div className="flex justify-center">
@@ -57,7 +58,7 @@ const RegisterPage = () => {
           </div>
           <div>
             <label htmlFor="passwordConfirm" className={labelClass}>
-              Confirm password
+              Confirm Password
             </label>
             <input
               id="passwordConfirm"
@@ -71,10 +72,18 @@ const RegisterPage = () => {
           <button
             className="rounded-md block w-fit m-auto bg-indigo-500 px-2 mt-6"
             type="submit"
+            data-testid="register-button"
           >
             Register
           </button>
-          {state.error && <p className="text-red-700 mt-2">{state.error}</p>}
+          {state.error && (
+            <p
+              className="text-red-700 mt-2"
+              data-testid={`${state.field || "form"}-error`}
+            >
+              {state.error}
+            </p>
+          )}
         </form>
       </div>
     </div>

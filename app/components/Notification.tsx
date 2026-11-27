@@ -9,6 +9,7 @@ export default function Notification() {
 
   return (
     <div
+      data-testid="notification"
       className={`z-100 px-4 py-2.5 rounded-lg text-white w-fit absolute bottom-5 right-5 ${
         type === "success" ? "bg-[#3fdc23]" : "bg-[#e31d1c]"
       }`}

@@ -27,41 +27,48 @@ const NewBlog = () => {
         <h2 className="text-2xl mb-4">Create a new Blog</h2>
         <form action={formAction}>
           <div>
-            <label className="w-16 inline-block">Title</label>
-            <input
-              className="bg-stone-200 rounded-sm mt-4 ml-2 text-slate-900"
-              type="text"
-              name="title"
-              required
-              defaultValue={state.values?.title}
-            />
+            <label className="w-16 inline-block">
+              Title
+              <input
+                className="bg-stone-200 rounded-sm mt-1 ml-2 text-slate-900"
+                type="text"
+                name="title"
+                required
+                defaultValue={state.values?.title}
+              />
+            </label>
           </div>
 
           <div>
-            <label className="w-16 inline-block">Author</label>
-            <input
-              className="bg-stone-200 rounded-sm mt-4 ml-2 text-slate-900"
-              type="text"
-              name="author"
-              required
-              defaultValue={state.values?.author}
-            />
+            <label className="w-16 inline-block">
+              Author
+              <input
+                className="bg-stone-200 rounded-sm mt-1 ml-2 text-slate-900"
+                type="text"
+                name="author"
+                required
+                defaultValue={state.values?.author}
+              />
+            </label>
           </div>
 
           <div>
-            <label className="w-16 inline-block">url</label>
-            <input
-              className="bg-stone-200 rounded-sm mt-4 ml-2 text-slate-900"
-              type="text"
-              name="url"
-              required
-              defaultValue={state.values?.url}
-            />
+            <label className="w-16 inline-block">
+              URL
+              <input
+                className="bg-stone-200 rounded-sm mt-1 ml-2 text-slate-900"
+                type="text"
+                name="url"
+                required
+                defaultValue={state.values?.url}
+              />
+            </label>
           </div>
 
           <button
             className="rounded-md block w-fit m-auto bg-indigo-500 px-2 mt-6"
             type="submit"
+            data-testid="create-blog-button"
           >
             Create
           </button>
