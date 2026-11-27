@@ -6,6 +6,7 @@ import {
   addBlog,
   addBlogToReadingList,
   incrementLike,
+  markAsRead,
 } from "../services/blogs";
 import { auth } from "@/auth";
 
@@ -69,4 +70,10 @@ export const addToReadingList = async (formData: FormData) => {
   await addBlogToReadingList(blogId);
   revalidatePath("/blogs");
   revalidatePath(`/blogs/${blogId}`);
+};
+
+export const markBlogAsRead = async (formData: FormData) => {
+  const id = Number(formData.get("id"));
+  await markAsRead(id);
+  revalidatePath("/me");
 };

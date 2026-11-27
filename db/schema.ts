@@ -31,6 +31,10 @@ export const readingList = pgTable("readingList", {
   read: boolean().default(false),
 });
 
+export const readingListRelations = relations(readingList, ({ one }) => ({
+  blog: one(blogs, { fields: [readingList.blogId], references: [blogs.id] }),
+}));
+
 export const usersRelations = relations(users, ({ many }) => ({
   blogs: many(blogs),
 }));

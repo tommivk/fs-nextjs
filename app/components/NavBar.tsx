@@ -18,6 +18,8 @@ const NavBar = () => {
           {" | "}
           <Link href="/blogs/new">create new</Link>
           {" | "}
+          <Link href="/me">me</Link>
+          {" | "}
           <em>{session.user?.name} logged in</em>{" "}
           <button onClick={() => signOut()}>logout</button>
         </>
