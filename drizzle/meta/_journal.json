@@ -22,6 +22,13 @@
       "when": 1795802508662,
       "tag": "0002_concerned_sentry",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1795805120086,
+      "tag": "0003_glossy_bug",
+      "breakpoints": true
     }
   ]
 }
