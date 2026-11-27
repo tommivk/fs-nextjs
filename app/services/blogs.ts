@@ -1,6 +1,6 @@
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { db } from "../../db";
-import { blogs } from "../../db/schema";
+import { blogs, readingList, users } from "../../db/schema";
 import { getCurrentUser } from "./session";
 
 export const getBlogs = async () => {
@@ -22,12 +22,33 @@ export const incrementLike = async (id: number) => {
   }
 };
 
+export const getUsersReadingList = async () => {
+  const user = await getCurrentUser();
+  if (!user) {
+    throw new Error("Not logged in");
+  }
+  return await db.query.readingList.findMany({
+    where: eq(readingList.userId, user.id),
+  });
+};
+
+export const addBlogToReadingList = async (blogId: number) => {
+  const user = await getCurrentUser();
+  if (!user) {
+    throw new Error("Not logged in");
+  }
+  await db.insert(readingList).values({ blogId, userId: user.id });
+};
+
 export const addBlog = async (title: string, author: string, url: string) => {
   const user = await getCurrentUser();
   if (!user) {
     throw new Error("Not logged in");
   }
-  return await db
+  const [blog] = await db
     .insert(blogs)
-    .values({ title, author, url, userId: user!.id });
+    .values({ title, author, url, userId: user!.id })
+    .returning({ id: blogs.id });
+
+  await addBlogToReadingList(blog.id);
 };

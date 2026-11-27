@@ -2,7 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { addBlog, incrementLike } from "../services/blogs";
+import {
+  addBlog,
+  addBlogToReadingList,
+  incrementLike,
+} from "../services/blogs";
 import { auth } from "@/auth";
 
 export const createBlog = async (
@@ -58,4 +62,11 @@ export const likeBlog = async (formData: FormData) => {
   await incrementLike(id);
   revalidatePath("/blogs");
   revalidatePath(`/blogs/${id}`);
+};
+
+export const addToReadingList = async (formData: FormData) => {
+  const blogId = Number(formData.get("blogId"));
+  await addBlogToReadingList(blogId);
+  revalidatePath("/blogs");
+  revalidatePath(`/blogs/${blogId}`);
 };
