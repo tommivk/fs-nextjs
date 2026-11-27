@@ -8,6 +8,20 @@
       "when": 1795800232073,
       "tag": "0000_real_dakota_north",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795802352439,
+      "tag": "0001_solid_satana",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795802508662,
+      "tag": "0002_concerned_sentry",
+      "breakpoints": true
     }
   ]
 }
