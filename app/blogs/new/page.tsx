@@ -4,7 +4,10 @@ import { useActionState } from "react";
 import { createBlog } from "../../actions/blogs";
 
 const NewBlog = () => {
-  const [state, formAction] = useActionState(createBlog, { error: "" });
+  const [state, formAction] = useActionState(createBlog, {
+    values: { title: "", author: "", url: "" },
+    error: "",
+  });
   return (
     <div>
       <h2>Create a new Blog</h2>
@@ -12,21 +15,36 @@ const NewBlog = () => {
         <div>
           <label>
             Title
-            <input type="text" name="title" required />
+            <input
+              type="text"
+              name="title"
+              required
+              defaultValue={state.values?.title}
+            />
           </label>
         </div>
 
         <div>
           <label>
             Author
-            <input type="text" name="author" required />
+            <input
+              type="text"
+              name="author"
+              required
+              defaultValue={state.values?.author}
+            />
           </label>
         </div>
 
         <div>
           <label>
             url
-            <input type="text" name="url" required />
+            <input
+              type="text"
+              name="url"
+              required
+              defaultValue={state.values?.url}
+            />
           </label>
         </div>
 

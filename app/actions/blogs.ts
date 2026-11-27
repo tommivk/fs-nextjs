@@ -6,7 +6,10 @@ import { addBlog, incrementLike } from "../services/blogs";
 import { auth } from "@/auth";
 
 export const createBlog = async (
-  prevState: { error: string },
+  prevState: {
+    values: { title: string; author: string; url: string };
+    error: string;
+  },
   formData: FormData,
 ) => {
   const session = await auth();
@@ -16,14 +19,30 @@ export const createBlog = async (
   const title = formData.get("title") as string;
   const author = formData.get("author") as string;
   const url = formData.get("url") as string;
+
+  const values = {
+    title,
+    author,
+    url,
+  };
+
   if (!title || title.length < 5) {
-    return { error: "Title must be at least 5 characters long" };
+    return {
+      values,
+      error: "Title must be at least 5 characters long",
+    };
   }
   if (!author || author.length < 5) {
-    return { error: "Author must be at least 5 characters long" };
+    return {
+      values,
+      error: "Author must be at least 5 characters long",
+    };
   }
   if (!url || url.length < 5) {
-    return { error: "Url must be at least 5 characters long" };
+    return {
+      values,
+      error: "Url must be at least 5 characters long",
+    };
   }
   addBlog(title, author, url);
   revalidatePath("/blogs");
